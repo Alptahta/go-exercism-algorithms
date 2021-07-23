@@ -1,32 +1,30 @@
 // Package raindrop implements number to rainbow converter
 package raindrops
 
-import (
-	"strconv"
-)
+import "strconv"
+
+type raindrop struct {
+	divisor int
+	drop    string
+}
+
+var drops = []raindrop{
+	{3, "Pling"},
+	{5, "Plang"},
+	{7, "Plong"},
+}
 
 // Convert converts integer number into raindrop string
 func Convert(n int) string {
-	const n3 int = 3
-	const n5 int = 5
-	const n7 int = 7
-
-	const hasFactor3 = "Pling"
-	const hasFactor5 = "Plang"
-	const hasFactor7 = "Plong"
-
 	var raindrop string
-	if n%n3 == 0 {
-		raindrop = hasFactor3
+
+	for _, drip := range drops {
+		if n%drip.divisor == 0 {
+			raindrop += drip.drop
+		}
 	}
-	if n%n5 == 0 {
-		raindrop = raindrop + hasFactor5
-	}
-	if n%n7 == 0 {
-		raindrop = raindrop + hasFactor7
-	}
-	if len(raindrop) == 0 {
-		return strconv.Itoa(n)
+	if raindrop == "" {
+		raindrop = strconv.Itoa(n)
 	}
 	return raindrop
 
