@@ -1,22 +1,23 @@
 //Package hamming implements Hamming Distance
 package hamming
 
-import "errors"
+import (
+	"errors"
+	"unicode/utf8"
+)
 
 // Distance calculates lenght of hamming distance of given two string
 func Distance(a, b string) (int, error) {
-	bsa := []byte(a)
-	bsb := []byte(b)
+	bsa := []rune(a)
+	bsb := []rune(b)
 
 	hammingDistance := 0
 
-	if len(a) != len(b) {
-		return hammingDistance, errors.New("Length of strands should be equal")
+	if utf8.RuneCountInString(a) != utf8.RuneCountInString(b) {
+		return hammingDistance, errors.New("length of strands should be equal")
 	}
 	for i, v := range bsa {
-		if v == bsb[i] {
-			hammingDistance += 0
-		} else {
+		if v != bsb[i] {
 			hammingDistance++
 		}
 	}
