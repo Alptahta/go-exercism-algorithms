@@ -21,10 +21,6 @@ var characters = map[rune]int{
 func Score(s string) int {
 	score := 0
 
-	if s == "" {
-		return score
-	}
-
 	for _, r := range strings.ToLower(s) {
 		score += characters[r]
 	}
