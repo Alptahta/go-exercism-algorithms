@@ -8,6 +8,7 @@ func IsIsogram(s string) bool {
 	rs := []rune(strings.ToLower(s))
 
 	for _, v := range rs {
+		// Check if v value is between Uncapitalized and Capitalized letter's unicodes
 		if (v >= 65 && v <= 90) || (v >= 97 && v <= 122) {
 			if containsDuplicate(rs, v) {
 				return false
